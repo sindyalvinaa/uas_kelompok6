@@ -26,20 +26,48 @@ class MyApp extends StatelessWidget {
               children: [
                 Container(
                   alignment: Alignment.center,
-                  child: const Text("List Data",
+                  child: const Text("Isi Data",
                       style: TextStyle(fontSize: 15, color: Colors.black)),
                   height: 40.0,
                   width: 250.0,
                 ),
                 Container(
                   alignment: Alignment.center,
-                  child: const Text("Deskripsi Data",
+                  child: const Text("List Data",
                       style: TextStyle(fontSize: 15, color: Colors.black)),
                   height: 40.0,
                   width: 250.0,
                 ),
               ],
             ),
+            TextFormField(
+              decoration: new InputDecoration(
+                  hintText: "masukan nama lengkap anda",
+                  labelText: "Nama Lengkap",
+                  icon: Icon(Icons.people),
+                  border: OutlineInputBorder(
+                  borderRadius: new BorderRadius.circular(5.0)),
+                ),
+              ),
+              TextFormField(
+                keyboardType: TextInputType.number,
+                  decoration: new InputDecoration(
+                  hintText: "masukan NIM anda",
+                  labelText: "NIM",
+                  icon: Icon(Icons.assignment),
+                  border: OutlineInputBorder(
+                  borderRadius: new BorderRadius.circular(5.0)),
+                ),
+              ),
+                TextFormField(
+                  decoration: new InputDecoration(
+                    hintText: "alamat lengkap anda",
+                    labelText: "ALAMAT",
+                    icon: Icon(Icons.location_city),
+                    border: OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(5.0)),
+                  ),
+                ),
           ],
         ),
       ),
@@ -47,5 +75,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
+  
 
  
