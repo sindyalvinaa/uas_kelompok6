@@ -2,7 +2,7 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:uas_kelompok6/model/item.dart';
 
 class HomePage extends StatelessWidget{
 
