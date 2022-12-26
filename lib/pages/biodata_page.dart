@@ -13,7 +13,7 @@ class BiodataPage extends StatelessWidget {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            title: Text("Biodata"),
+            title: Text("Biodata Mahasiswa"),
           ),
           body: myBody(),
         ),
@@ -47,7 +47,7 @@ class _mybody extends State<myBody> {
         children: [
           Container(
             child: Text(
-              "Add Biodata",
+              "Tambah Biodata",
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
@@ -60,7 +60,9 @@ class _mybody extends State<myBody> {
           Container(
             child: TextField(
               decoration: InputDecoration(
+                hintText: 'masukan Nim anda',
                 label: Text("NIM : "),
+                icon: Icon(Icons.assessment),
               ),
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
