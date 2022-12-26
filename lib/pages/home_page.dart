@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomeState extends State<HomePage> {
-  DbHelper dbHelper = DbHelper();
+  //DbHelper dbHelper = DbHelper();
   int count = 0;
   List<Item> itemList;
 

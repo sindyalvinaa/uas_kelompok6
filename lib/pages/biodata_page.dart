@@ -45,19 +45,7 @@ class _bodyku extends State<Bodyku> {
       body: Column(
         children: [
           Container(
-            child: Text(
-              "Tambah Biodata",
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(top: 20),
-          ),
-          Container(
-            child: TextField(
+            child: TextFormField(
                 controller: nimController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
@@ -71,12 +59,14 @@ class _bodyku extends State<Bodyku> {
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             ),
             margin: EdgeInsets.only(
+              top: 20.0,
+              bottom: 20.0,
               left: 102,
               right: 102,
             ),
           ),
           Container(
-            child: TextField(
+            child: TextFormField(
                 controller: namaController,
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
@@ -89,12 +79,14 @@ class _bodyku extends State<Bodyku> {
               ),
             ),
             margin: EdgeInsets.only(
+              top: 20.0,
+              bottom: 20.0,
               left: 102,
               right: 102,
             ),
           ),
           Container(
-            child: TextField(
+            child: TextFormField(
                 controller: alamatController,
                 keyboardType: TextInputType.streetAddress,
                 decoration: InputDecoration(
@@ -107,6 +99,8 @@ class _bodyku extends State<Bodyku> {
                 ),
             ),
             margin: EdgeInsets.only(
+              top: 20.0,
+              bottom: 20.0,
               left: 102,
               right: 102,
             ),
