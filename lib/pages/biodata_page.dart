@@ -4,41 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:uas_kelompok6/models/item.dart';
 
-class HomePage extends StatelessWidget{
-
+class BiodataPage extends StatefulWidget{
   @override
-  Widget build(BuildContext context){
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 4,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text("APLIKASI KELOMPOK 6"),
-            bottom: const TabBar(
-              tabs: [
-                Tab(text: "LIST DATA"),
-                Tab(text: "DETAIL DATA"),
-              ],
-            ),
-          ),
-          body: myBody(),
-        ),
-      ),
-    );
-  }
-}
-
-class myBody extends StatefulWidget{
-  @override
-  State<myBody> createState() => _myBody();
+  State<BiodataPage> createState() => _BiodataPage();
 }
 
 enum Gender {male, female}
 
-class _myBody extends State<myBody>{
+class _BiodataPage extends State<BiodataPage>{
   Gender _gender = Gender.male;
   
-  Item item ;
+  // Item item ;
   
   TextEditingController nimController = TextEditingController();
   TextEditingController namaController = TextEditingController();
@@ -47,12 +23,12 @@ class _myBody extends State<myBody>{
 
   @override
   Widget build(BuildContext context){
-    if(item !=null){
-      nimController.text = item.nim.toString();
-      namaController.text = item.nama;
-      alamatController.text = item.alamat;
-      jenisKelaminController.text = item.jenisKelamin;
-    }
+    // if(item != null){
+    //   nimController.text = item.nim.toString();
+    //   namaController.text = item.nama;
+    //   alamatController.text = item.alamat;
+    //   jenisKelaminController.text = item.jenisKelamin;
+    // }
 
     return MaterialApp(
       home: Column(
@@ -162,7 +138,7 @@ class _myBody extends State<myBody>{
           //     ElevatedButton(
           //       onPressed: (
           //         () {
-          //           item = item(
+          //           items = items(
           //             nimController.toString(),
           //             namaController.text,
           //             alamatController.text,
@@ -181,5 +157,10 @@ class _myBody extends State<myBody>{
       ),
     );
   }
+  // @override
+  // void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  //   super.debugFillProperties(properties);
+  //   properties.add(DiagnosticsProperty<Item>('item', item));
+  // }
 }
      

@@ -16,7 +16,7 @@ class Item {
   set alamat(String value) => this._alamat = value;
 
   String get jenisKelamin => this._jenisKelamin;
-  set jk(String value) => this._jenisKelamin = value;
+  set jenisKelamin(String value) => this._jenisKelamin = value;
 
   //Konstruksi versi 1
   Item(this._nim, this._nama, this._alamat, this._jenisKelamin);
