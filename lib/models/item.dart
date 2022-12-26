@@ -19,7 +19,7 @@ class Item {
   set jenisKelamin(String value) => _jenisKelamin = value;
 
   // konstruktor versi 1
-  Item(this._nim,this._nama, this._alamat, this._jenisKelamin, [int parse]);
+  Item(this._nim,this._nama, this._alamat, this._jenisKelamin);
 
   // konstruktor versi 2: konversi dari Map ke Item
   Item.fromMap(Map<String, dynamic> map) {

@@ -1,166 +1,198 @@
-import 'dart:html';
-
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
+import 'package:uas_kelompok6/DbHelper.dart';
 import 'package:uas_kelompok6/models/item.dart';
 
-class BiodataPage extends StatefulWidget{
+
+class BiodataPage extends StatelessWidget {
   @override
-  State<BiodataPage> createState() => _BiodataPage();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("Biodata"),
+          ),
+          body: myBody(),
+        ),
+      ),
+    );
+  }
 }
 
-enum Gender {male, female}
+class myBody extends StatefulWidget {
+  @override
+  State<myBody> createState() => _mybody();
+}
 
-class _BiodataPage extends State<BiodataPage>{
+enum Gender { male, female }
+
+class _mybody extends State<myBody> {
   Gender _gender = Gender.male;
-  
-  // Item item ;
-  
-  TextEditingController nimController = TextEditingController();
-  TextEditingController namaController = TextEditingController();
-  TextEditingController alamatController = TextEditingController();
-  TextEditingController jenisKelaminController = TextEditingController();
+
+  Item item;
+
+  // DbHelper dbHelper = DbHelper();
+
+  final nimController = TextEditingController();
+  final namaController = TextEditingController();
+  final alamatController = TextEditingController();
 
   @override
-  Widget build(BuildContext context){
-    // if(item != null){
-    //   nimController.text = item.nim.toString();
-    //   namaController.text = item.nama;
-    //   alamatController.text = item.alamat;
-    //   jenisKelaminController.text = item.jenisKelamin;
-    // }
-
-    return MaterialApp(
-      home: Column(
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
         children: [
           Container(
             child: Text(
-              "Tambah Data",
+              "Add Biodata",
               style: TextStyle(
-                fontSize: 17,
+                fontSize: 15,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
             ),
             alignment: Alignment.center,
-            padding: EdgeInsets.only(top: 21),
+            padding: EdgeInsets.only(top: 20),
           ),
-
           Container(
-            child: TextFormField(
+            child: TextField(
+              decoration: InputDecoration(
+                label: Text("NIM : "),
+              ),
               keyboardType: TextInputType.number,
-              decoration: new InputDecoration(
-                hintText: "Masukan NIM anda",
-                labelText: "NIM",
-                icon: Icon(Icons.assignment),
-                border: OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(5.0)
-                ),
-              ),
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              controller: nimController,
+            ),
+            margin: EdgeInsets.only(
+              left: 100,
+              right: 100,
             ),
           ),
-
           Container(
-            child: TextFormField(
-              decoration: new InputDecoration(
-                hintText: "Masukan nama lengkap anda",
-                labelText: "Nama Lengkap",
-                icon: Icon(Icons.people),
-                border: OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(5.0)
-                ),
+            child: TextField(
+              decoration: InputDecoration(
+                label: Text("Nama :"),
               ),
+              keyboardType: TextInputType.name,
+              controller: namaController,
+            ),
+            margin: EdgeInsets.only(
+              left: 100,
+              right: 100,
             ),
           ),
-
           Container(
-            child: TextFormField(
-              decoration: new InputDecoration(
-                hintText: "Alamat lengkap anda",
-                labelText: "ALAMAT",
-                hintMaxLines: 3,
-                icon: Icon(Icons.location_city),
-                border: OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(5.0)
-                ),
-              ),
+            child: TextField(
+              decoration: InputDecoration(label: Text("Alamat :")),
+              keyboardType: TextInputType.streetAddress,
+              controller: alamatController,
+            ),
+            margin: EdgeInsets.only(
+              left: 100,
+              right: 100,
             ),
           ),
-            
-          // Row(
-          //   children: <Widget>[
-          //     Expanded(
-          //       child: ListTile(
-          //         title: const Text("PRIA"),
-          //         leading: Radio<Gender>(
-          //           value: Gender.male,
-          //           groupValue: _gender,
-          //           onChanged: (
-          //             Gender (value) {
-          //               setState(
-          //                 () {
-          //                   _gender = jenisKelaminController.text as Gender;
-          //                   _gender = value;
-          //                 }
-          //               );
-          //             }
-          //           ),
-          //         ),
-          //         contentPadding: EdgeInsets.only(left: 150, top: 22, bottom: 22),
-          //       ),
-          //     ),
-                
-          //     Expanded(
-          //       child: ListTile(
-          //         title: const Text("WANITA"),
-          //         leading: Radio<Gender>(
-          //           value: Gender.female,
-          //           groupValue: _gender,
-          //           onChanged: (
-          //             Gender (value) {
-          //               setState(
-          //                 () {
-          //                   _gender = jenisKelaminController.text as Gender;
-          //                   _gender = value;
-          //                 }
-          //               );
-          //             }
-          //           ),
-          //         ),
-          //         contentPadding: EdgeInsets.only(left: 150, top: 22, bottom: 22),
-          //       ),
-          //     ),
-          //   ],
-          // ),
-            
-          // Column(
-          //   children: [
-          //     ElevatedButton(
-          //       onPressed: (
-          //         () {
-          //           items = items(
-          //             nimController.toString(),
-          //             namaController.text,
-          //             alamatController.text,
-          //             jenisKelaminController.text
-          //           );
-          //         }
-          //       ),
-          //       child: Text("SAVE DATA"),
-          //       style: ButtonStyle(
-          //         alignment: Alignment.center,
-          //       ),
-          //     ),
-          //   ],
-          // ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: RadioListTile(
+                  title: const Text("Male"),
+                  value: Gender.male,
+                  groupValue: _gender,
+                  onChanged: (Gender value) {
+                    setState(() {
+                      _gender = value;
+                    });
+                  },
+                  contentPadding:
+                      EdgeInsets.only(left: 10, top: 20, bottom: 20),
+                ),
+              ),
+              Expanded(
+                child: RadioListTile(
+                  title: const Text("Female"),
+                  value: Gender.female,
+                  groupValue: _gender,
+                  onChanged: (Gender value) {
+                    setState(() {
+                      _gender = value;
+                    });
+                  },
+                  contentPadding:
+                      EdgeInsets.only(top: 20, bottom: 20),
+                ),
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              ElevatedButton(
+                onPressed: () async {
+                  var gender = _gender.toString();
+
+                  if (gender == "Gender.male") {
+                    gender = "male";
+                  } else {
+                    gender = "female";
+                  }
+
+                  item = Item(int.parse(nimController.text),
+                      namaController.text, alamatController.text, gender);
+                  if (item != null) {
+                    print('goto here');
+                    await addItem(item);
+                    if (!mounted) return;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DataPage(),
+                      ),
+                    );
+                  }
+                },
+                child: Text("Tambah Data"),
+                style: ButtonStyle(
+                  alignment: Alignment.center,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
   }
-  // @override
-  // void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  //   super.debugFillProperties(properties);
-  //   properties.add(DiagnosticsProperty<Item>('item', item));
-  // }
+
+  Future<void> addItem(Item item) async {
+    print('goto here2');
+    int result = await DbHelper.insert(item);
+    if (!mounted) return;
+    if (result > 0){
+      showAlertDialog(context);
+    }
+  }
 }
-     
+
+showAlertDialog(BuildContext context) {
+  Item item;
+  Widget okButton = MaterialButton(
+    child: Text("OK"),
+    onPressed: () {},
+  );
+
+  AlertDialog alert = AlertDialog(
+    title: Text("Success"),
+    content: Text("Data Telah di Tambahkan"),
+    actions: [
+      okButton,
+    ],
+  );
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
