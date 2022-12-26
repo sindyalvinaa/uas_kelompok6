@@ -15,21 +15,21 @@ class BiodataPage extends StatelessWidget {
           appBar: AppBar(
             title: Text("Biodata Mahasiswa"),
           ),
-          body: myBody(),
+          body: Bodyku(),
         ),
       ),
     );
   }
 }
 
-class myBody extends StatefulWidget {
+class Bodyku extends StatefulWidget {
   @override
-  State<myBody> createState() => _mybody();
+  State<Bodyku> createState() => _bodyku();
 }
 
 enum Gender { male, female }
 
-class _mybody extends State<myBody> {
+class _bodyku extends State<Bodyku> {
   Gender _gender = Gender.male;
 
   Item item;
