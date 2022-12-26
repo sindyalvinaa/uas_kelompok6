@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Flutter Tabs Demo'),
+            title: Text('Flutter Demo Kelompok 6'),
             bottom: TabBar(
               tabs: [
                 Tab(icon: Icon(Icons.home), text: "Tambah Data"),

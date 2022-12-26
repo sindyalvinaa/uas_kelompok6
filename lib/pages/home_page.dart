@@ -27,7 +27,7 @@ class HomeState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Daftar Item'),
+        title: Text('Daftar Data'),
       ),
       body: Column(children: [
         Expanded(
@@ -38,12 +38,12 @@ class HomeState extends State<HomePage> {
           child: SizedBox(
             width: double.infinity,
             child: MaterialButton(
-              child: Text("Tambah Item"),
+              child: Text("Tambah Data"),
               onPressed: () async {
                 var item = await navigateToEntryForm(context, null);
                 if (item != null) {
                   //TODO 2 Panggil Fungsi untuk Insert ke DB
-                  int result = await dbHelper.insert(item);
+                  int result = await DbHelper.insert(item);
                   if (result > 0) {
                     updateListView();
                   }
@@ -59,7 +59,7 @@ class HomeState extends State<HomePage> {
   Future<Item> navigateToEntryForm(BuildContext context, Item item) async {
     var result = await Navigator.push(context,
         MaterialPageRoute(builder: (BuildContext context) {
-      return EntryForm(item);
+      return BiodataPage();
     }));
     return result;
   }
@@ -103,10 +103,10 @@ class HomeState extends State<HomePage> {
 
   //update List item
   void updateListView() {
-    final Future<Database> dbFuture = dbHelper.initDb();
+    final Future<Database> dbFuture = DbHelper.initDb();
     dbFuture.then((database) {
       //todo
-      Future<List<Item>> itemListFuture = dbHelper.getItemList();
+      Future<List<Item>> itemListFuture = DbHelper.getItemList();
       itemListFuture.then((itemList) {
         setState(() {
           this.itemList = itemList;
@@ -117,14 +117,14 @@ class HomeState extends State<HomePage> {
   }
 
   void deleteItem(Item object) async {
-    int result = await dbHelper.delete(object.nim);
+    int result = await DbHelper.delete(object.nim);
     if (result > 0) {
       updateListView();
     }
   }
 
   void editItem(Item object) async {
-    int result = await dbHelper.update(object);
+    int result = await DbHelper.update(object);
     if (result > 0) {
       updateListView();
     }

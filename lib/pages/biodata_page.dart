@@ -10,7 +10,7 @@ class BiodataPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 3,
+        length: 4,
         child: Scaffold(
           appBar: AppBar(
             title: Text("Biodata Mahasiswa"),
@@ -34,11 +34,10 @@ class _mybody extends State<myBody> {
 
   Item item;
 
-  // DbHelper dbHelper = DbHelper();
 
-  final nimController = TextEditingController();
-  final namaController = TextEditingController();
-  final alamatController = TextEditingController();
+  TextEditingController nimController = TextEditingController();
+  TextEditingController namaController = TextEditingController();
+  TextEditingController alamatController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -59,49 +58,64 @@ class _mybody extends State<myBody> {
           ),
           Container(
             child: TextField(
-              decoration: InputDecoration(
-                hintText: 'masukan Nim anda',
-                label: Text("NIM : "),
-                icon: Icon(Icons.assessment),
+                controller: nimController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: "masukan NIM anda",
+                  labelText: 'NIM',
+                  icon: Icon(Icons.assignment),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
               ),
-              keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              controller: nimController,
             ),
             margin: EdgeInsets.only(
-              left: 100,
-              right: 100,
+              left: 102,
+              right: 102,
             ),
           ),
           Container(
             child: TextField(
-              decoration: InputDecoration(
-                label: Text("Nama :"),
+                controller: namaController,
+                keyboardType: TextInputType.name,
+                decoration: InputDecoration(
+                  hintText: "masukan nama lengkap anda",
+                  labelText: 'NAMA',
+                  icon: Icon(Icons.people),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
               ),
-              keyboardType: TextInputType.name,
-              controller: namaController,
             ),
             margin: EdgeInsets.only(
-              left: 100,
-              right: 100,
+              left: 102,
+              right: 102,
             ),
           ),
           Container(
             child: TextField(
-              decoration: InputDecoration(label: Text("Alamat :")),
-              keyboardType: TextInputType.streetAddress,
-              controller: alamatController,
+                controller: alamatController,
+                keyboardType: TextInputType.streetAddress,
+                decoration: InputDecoration(
+                  hintText: "alamat lengkap anda",
+                  labelText: 'ALAMAT',
+                  icon: Icon(Icons.location_city),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
             ),
             margin: EdgeInsets.only(
-              left: 100,
-              right: 100,
+              left: 102,
+              right: 102,
             ),
           ),
           Row(
             children: <Widget>[
               Expanded(
                 child: RadioListTile(
-                  title: const Text("Male"),
+                  title: const Text("PRIA"),
                   value: Gender.male,
                   groupValue: _gender,
                   onChanged: (Gender value) {
@@ -115,7 +129,7 @@ class _mybody extends State<myBody> {
               ),
               Expanded(
                 child: RadioListTile(
-                  title: const Text("Female"),
+                  title: const Text("WANITA"),
                   value: Gender.female,
                   groupValue: _gender,
                   onChanged: (Gender value) {
@@ -136,13 +150,13 @@ class _mybody extends State<myBody> {
                   var gender = _gender.toString();
 
                   if (gender == "Gender.male") {
-                    gender = "male";
+                    gender = "PRIA";
                   } else {
-                    gender = "female";
+                    gender = "WANITA";
                   }
 
-                  item = Item(int.parse(nimController.text),
-                      namaController.text, alamatController.text, gender);
+                  // item = Item(int.parse(nimController.text),
+                  //     namaController.text, alamatController.text, gender);
                   if (item != null) {
                     print('goto here');
                     await addItem(item);
@@ -185,8 +199,8 @@ showAlertDialog(BuildContext context) {
   );
 
   AlertDialog alert = AlertDialog(
-    title: Text("Success"),
-    content: Text("Data Telah di Tambahkan"),
+    title: Text("BERHASIL"),
+    content: Text("Data Anda Berhasil Ditambahkan"),
     actions: [
       okButton,
     ],
