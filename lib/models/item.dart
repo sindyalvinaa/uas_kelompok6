@@ -1,42 +1,40 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: unnecessary_getters_setters
 
 class Item {
-  String _nim;
+  int _nim;
   String _nama;
   String _alamat;
   String _jenisKelamin;
 
-  String get nim => this._nim;
-  set nim(String value) => this._nim = value;
+  int get nim => _nim;
+  set nim(int value) => _nim = value;
 
-  String get nama => this._nama;
-  set nama(String value) => this._nama = value;
+  String get nama => _nama;
+  set nama(String value) => _nama = value;
 
-  String get alamat => this._alamat;
-  set alamat(String value) => this._alamat = value;
+  String get alamat => _alamat;
+  set alamat(String value) => _alamat = value;
 
-  String get jenisKelamin => this._jenisKelamin;
-  set jenisKelamin(String value) => this._jenisKelamin = value;
+  String get jenisKelamin => _jenisKelamin;
+  set jenisKelamin(String value) => _jenisKelamin = value;
 
-  //Konstruksi versi 1
-  Item(this._nim, this._nama, this._alamat, this._jenisKelamin);
+  // konstruktor versi 1
+  Item(this._nim,this._nama, this._alamat, this._jenisKelamin, [int parse]);
 
-  //Konstruktor versi 2 : konversi dari map ke item
-  // Item.fromMap(Map<String, dynamic> map) {
-  //   this._nim = map['nim'];
-  //   this._nama = map['nama'];
-  //   this._alamat = map['alamat'];
-  //   this._jenisKelamin = map['jenis kelamin'];
-  // }
-
-  //Konversi dari item ke item
+  // konstruktor versi 2: konversi dari Map ke Item
+  Item.fromMap(Map<String, dynamic> map) {
+    this._nim = map['nim'];
+    this._nama = map['nama'];
+    this._alamat = map['alamat'];
+    this._jenisKelamin = map['jenisKelamin'];
+  }
+  // konversi dari Item ke Map
   Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = Map<String, dynamic>();
-    map['nim'] = this._nim;
+    Map<String, dynamic> map = <String, dynamic>{};
+    map['nim'] = _nim;
     map['nama'] = nama;
     map['alamat'] = alamat;
-    map['jenis kelamin'] = jenisKelamin;
-
+    map['jenisKelamin'] = jenisKelamin;
     return map;
   }
 }
