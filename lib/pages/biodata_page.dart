@@ -90,6 +90,26 @@ class _BiodataPage extends State<BiodataPage> {
               ),
             ],
           ),
+          
+          Padding(
+            padding:EdgeInsets.only(top:20.0, bottom:20.0),
+            child: ElevatedButton(
+              child: Text('SAVE'),
+              style: ElevatedButton.styleFrom(
+                // textStyle: TextStyle(fontSize: 30),
+                // fixedSize: Size(200, 80),
+                primary: Colors.deepPurple,
+                elevation: 3,
+                // shape: RoundedRectangleBorder(
+                //   borderRadius: BorderRadius.circular(10)
+                // ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+
+              } 
+            ),
+          ),
         ],
       ),
     );
@@ -120,11 +140,3 @@ class _BiodataPage extends State<BiodataPage> {
 //   );
 // }
 
-// Future<void> addItem(Item item) async {
-//     print('goto here2');
-//     int result = await DbHelper.insert(item);
-//     if (!mounted) return;
-//     if (result > 0){
-//       showAlertDialog(context);
-//     }
-//   }
