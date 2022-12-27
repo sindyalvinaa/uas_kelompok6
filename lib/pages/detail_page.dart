@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
-  //@Override
+  @override
   Widget build(BuildContext context) {
     return MaterialApp();
   }

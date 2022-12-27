@@ -1,171 +1,91 @@
-import "package:flutter/material.dart";
-import 'package:flutter/services.dart';
-import 'package:uas_kelompok6/database/dbhelper.dart';
-import 'package:uas_kelompok6/models/item.dart';
-import 'package:uas_kelompok6/pages/data_page.dart';
+import 'package:flutter/material.dart';
 
-
-class BiodataPage extends StatelessWidget {
+class BiodataPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 4,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text("Biodata Mahasiswa"),
-          ),
-          body: Bodyku(),
-        ),
-      ),
-    );
-  }
-}
-
-class Bodyku extends StatefulWidget {
-  @override
-  State<Bodyku> createState() => _bodyku();
+  _BiodataPage createState() => _BiodataPage();
 }
 
 enum Gender { male, female }
 
-class _bodyku extends State<Bodyku> {
+class _BiodataPage extends State<BiodataPage> {
   Gender _gender = Gender.male;
-
-  Item item;
-
-
-  TextEditingController nimController = TextEditingController();
-  TextEditingController namaController = TextEditingController();
-  TextEditingController alamatController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: ListView(
+        padding: EdgeInsets.all(10.0),
         children: [
-          Container(
-            child: TextFormField(
-                controller: nimController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  hintText: "masukan NIM anda",
+          Padding(
+            padding: EdgeInsets.only(
+              top: 10,
+            ),
+            child: TextField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                  hintText: 'Masukkan NIM',
                   labelText: 'NIM',
                   icon: Icon(Icons.assignment),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-              ),
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            ),
-            margin: EdgeInsets.only(
-              top: 20.0,
-              bottom: 20.0,
-              left: 102,
-              right: 102,
+                      borderRadius: new BorderRadius.circular(5.0))),
             ),
           ),
-          Container(
-            child: TextFormField(
-                controller: namaController,
-                keyboardType: TextInputType.name,
-                decoration: InputDecoration(
-                  hintText: "masukan nama lengkap anda",
-                  labelText: 'NAMA',
+
+          Padding(
+            padding: EdgeInsets.only(
+              top: 10,
+            ),
+            child: TextField(
+              keyboardType: TextInputType.name,
+              decoration: InputDecoration(
+                  hintText: 'Masukkan Nama Lengkap',
+                  labelText: 'Nama',
                   icon: Icon(Icons.people),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-              ),
-            ),
-            margin: EdgeInsets.only(
-              top: 20.0,
-              bottom: 20.0,
-              left: 102,
-              right: 102,
+                      borderRadius: new BorderRadius.circular(5.0))),
             ),
           ),
-          Container(
-            child: TextFormField(
-                controller: alamatController,
-                keyboardType: TextInputType.streetAddress,
-                decoration: InputDecoration(
-                  hintText: "alamat lengkap anda",
-                  labelText: 'ALAMAT',
+
+          Padding(
+            padding: EdgeInsets.only(
+              top: 10,
+            ),
+            child: TextField(
+              keyboardType: TextInputType.streetAddress,
+              decoration: InputDecoration(
+                  hintText: 'Masukkan Alamat Lengkap',
+                  labelText: 'Alamat',
                   icon: Icon(Icons.location_city),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                ),
-            ),
-            margin: EdgeInsets.only(
-              top: 20.0,
-              bottom: 20.0,
-              left: 102,
-              right: 102,
+                      borderRadius: new BorderRadius.circular(5.0))),
             ),
           ),
+
           Row(
             children: <Widget>[
+              Text('Jenis Kelamin'),
               Expanded(
                 child: RadioListTile(
-                  title: const Text("PRIA"),
+                  title: const Text("Pria"),
                   value: Gender.male,
                   groupValue: _gender,
-                  onChanged: (Gender value) {
+                  onChanged: (Gender? value) {
                     setState(() {
-                      _gender = value;
+                      _gender = value!;
                     });
                   },
-                  contentPadding:
-                      EdgeInsets.only(left: 10, top: 20, bottom: 20),
                 ),
               ),
               Expanded(
                 child: RadioListTile(
-                  title: const Text("WANITA"),
+                  title: const Text("Wanita"),
                   value: Gender.female,
                   groupValue: _gender,
-                  onChanged: (Gender value) {
+                  onChanged: (Gender? value) {
                     setState(() {
-                      _gender = value;
+                      _gender = value!;
                     });
                   },
-                  contentPadding:
-                      EdgeInsets.only(top: 20, bottom: 20),
-                ),
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              ElevatedButton(
-                onPressed: () async {
-                  var gender = _gender.toString();
-
-                  if (gender == "Gender.male") {
-                    gender = "PRIA";
-                  } else {
-                    gender = "WANITA";
-                  }
-
-                  // item = Item(int.parse(nimController.text),
-                  //     namaController.text, alamatController.text, gender);
-                  if (item != null) {
-                    print('goto here');
-                    await addItem(item);
-                    if (!mounted) return;
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DataPage(),
-                      ),
-                    );
-                  }
-                },
-                child: Text("Tambah Data"),
-                style: ButtonStyle(
-                  alignment: Alignment.center,
                 ),
               ),
             ],
@@ -174,36 +94,37 @@ class _bodyku extends State<Bodyku> {
       ),
     );
   }
-
-  Future<void> addItem(Item item) async {
-    print('goto here2');
-    int result = await DbHelper.insert(item);
-    if (!mounted) return;
-    if (result > 0){
-      showAlertDialog(context);
-    }
-  }
 }
 
-showAlertDialog(BuildContext context) {
-  Item item;
-  Widget okButton = MaterialButton(
-    child: Text("OK"),
-    onPressed: () {},
-  );
 
-  AlertDialog alert = AlertDialog(
-    title: Text("BERHASIL"),
-    content: Text("Data Anda Berhasil Ditambahkan"),
-    actions: [
-      okButton,
-    ],
-  );
+// showAlertDialog(BuildContext context) {
+//   Item item;
+//   Widget okButton = MaterialButton(
+//     child: Text("OK"),
+//     onPressed: () {},
+//   );
 
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
-}
+//   AlertDialog alert = AlertDialog(
+//     title: Text("BERHASIL"),
+//     content: Text("Data Anda Berhasil Ditambahkan"),
+//     actions: [
+//       okButton,
+//     ],
+//   );
+
+//   showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return alert;
+//     },
+//   );
+// }
+
+// Future<void> addItem(Item item) async {
+//     print('goto here2');
+//     int result = await DbHelper.insert(item);
+//     if (!mounted) return;
+//     if (result > 0){
+//       showAlertDialog(context);
+//     }
+//   }
